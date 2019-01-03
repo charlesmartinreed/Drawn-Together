@@ -12,6 +12,8 @@
 		8C7D8A4821DEAF7F00FB104B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C7D8A4621DEAF7F00FB104B /* Main.storyboard */; };
 		8C7D8A4A21DEAF8100FB104B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C7D8A4921DEAF8100FB104B /* Assets.xcassets */; };
 		8C7D8A4D21DEAF8100FB104B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C7D8A4B21DEAF8100FB104B /* LaunchScreen.storyboard */; };
+		8C7D8A5521DEB7D100FB104B /* Canvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7D8A5421DEB7D100FB104B /* Canvas.swift */; };
+		8C7D8A5921DEBE5900FB104B /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7D8A5821DEBE5900FB104B /* Colors.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		8C7D8A4921DEAF8100FB104B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8C7D8A4C21DEAF8100FB104B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8C7D8A4E21DEAF8100FB104B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8C7D8A5421DEB7D100FB104B /* Canvas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Canvas.swift; sourceTree = "<group>"; };
+		8C7D8A5821DEBE5900FB104B /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,14 +58,32 @@
 		8C7D8A4121DEAF7F00FB104B /* Drawn Together */ = {
 			isa = PBXGroup;
 			children = (
+				8C7D8A5621DEB82800FB104B /* Views */,
 				8C7D8A4221DEAF7F00FB104B /* AppDelegate.swift */,
-				8C7D8A4421DEAF7F00FB104B /* ViewController.swift */,
+				8C7D8A5721DEB83D00FB104B /* Controllers */,
 				8C7D8A4621DEAF7F00FB104B /* Main.storyboard */,
 				8C7D8A4921DEAF8100FB104B /* Assets.xcassets */,
 				8C7D8A4B21DEAF8100FB104B /* LaunchScreen.storyboard */,
 				8C7D8A4E21DEAF8100FB104B /* Info.plist */,
+				8C7D8A5821DEBE5900FB104B /* Colors.swift */,
 			);
 			path = "Drawn Together";
+			sourceTree = "<group>";
+		};
+		8C7D8A5621DEB82800FB104B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8C7D8A5421DEB7D100FB104B /* Canvas.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		8C7D8A5721DEB83D00FB104B /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				8C7D8A4421DEAF7F00FB104B /* ViewController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -136,7 +158,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C7D8A4521DEAF7F00FB104B /* ViewController.swift in Sources */,
+				8C7D8A5921DEBE5900FB104B /* Colors.swift in Sources */,
 				8C7D8A4321DEAF7F00FB104B /* AppDelegate.swift in Sources */,
+				8C7D8A5521DEB7D100FB104B /* Canvas.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
