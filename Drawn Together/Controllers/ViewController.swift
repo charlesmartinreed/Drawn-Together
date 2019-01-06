@@ -8,60 +8,61 @@
 
 import UIKit
 
-
-
 class ViewController: UIViewController {
-
+    
     //MARK:- Properties
     let canvas = Canvas()
-    let undoButton = UIButton()
-    let clearButton = UIButton()
+    
+    let undoButton: UIButton = {
+       let button = UIButton(type: .system)
+        button.setTitle("Undo", for: .normal)
+        button.titleLabel?.font = .boldSystemFont(ofSize: 14)
+        button.addTarget(self, action: #selector(handleUndo), for: .touchUpInside)
+        return button
+    }()
+    
+    let clearButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Clear", for: .normal)
+        button.titleLabel?.font = .boldSystemFont(ofSize: 14)
+        button.addTarget(self, action: #selector(handleClear), for: .touchUpInside)
+        return button
+    }()
+    
+    override func loadView() {
+        //we can immediately set the view controller's view to be the canvas
+        self.view = canvas
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.addSubview(canvas)
-        
-        
-        layoutCanvas()
-        
+        layoutToolbar()
     }
 
-    func layoutCanvas() {
-        canvas.backgroundColor = .white //the canvas color seems to become black when the context is grabbed
-        canvas.frame = view.frame
+    
+    func layoutToolbar() {
+        //V1: using stack views to layout our tools window directly onto the canvas
+        let stackview = UIStackView(arrangedSubviews: [
+            undoButton,
+            clearButton
+            ])
+        stackview.distribution = .fillEqually
         
-        view.addSubview(undoButton)
-        view.addSubview(clearButton)
-        
-        //setting up buttons
-        //TODO: Put the buttons, the color picker and the line width slider into a seperate view that is presented like a card view when the user pulls up
-        undoButton.setTitle("Undo", for: .normal)
-        undoButton.backgroundColor = Colors.notQuiteBlue
-        undoButton.setTitleColor(UIColor.white, for: .normal)
-        undoButton.layer.cornerRadius = 12
-
-        undoButton.translatesAutoresizingMaskIntoConstraints = false
-        undoButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        undoButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 8).isActive = true
-        undoButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -8).isActive = true
-        undoButton.bottomAnchor.constraint(equalTo: clearButton.topAnchor, constant: -8).isActive = true
-        
-        undoButton.addTarget(canvas, action: #selector(canvas.undo), for: .touchUpInside)
-        
-        clearButton.setTitle("Clear", for: .normal)
-        clearButton.backgroundColor = Colors.notQuiteBlue
-        clearButton.setTitleColor(UIColor.white, for: .normal)
-        clearButton.layer.cornerRadius = 12
-        
-        clearButton.translatesAutoresizingMaskIntoConstraints = false
-        clearButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        clearButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 8).isActive = true
-        clearButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -8).isActive = true
-        clearButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -8).isActive = true
-        
-        clearButton.addTarget(canvas, action: #selector(canvas.clear), for: .touchUpInside)
-        
+        //MARK:- Stackview constraints
+        view.addSubview(stackview)
+        stackview.translatesAutoresizingMaskIntoConstraints = false
+        stackview.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        stackview.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        stackview.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+    }
+    
+    @objc fileprivate func handleUndo() {
+        canvas.undo()
+    }
+    
+    @objc fileprivate func handleClear() {
+        canvas.clear()
     }
 
 }

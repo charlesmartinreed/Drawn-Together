@@ -9,6 +9,31 @@
 import UIKit
 
 class Canvas: UIView {
+    
+    //MARK:- Undo/clear
+    //public functions - think about using a protocol/delegate paradigm in refactor
+    func undo() {
+        //lines is constantly being appended to, getting new points as we draw
+        _ = lines.popLast() //remove the last line from the collection
+        setNeedsDisplay() //view will invoke the draw function again
+    }
+    
+    func clear() {
+        lines.removeAll()
+        setNeedsDisplay()
+    }
+    
+    fileprivate var lines = [[CGPoint]]()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.backgroundColor = .white
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
     override func draw(_ rect: CGRect) {
         //implement custom drawing functionality
         super.draw(rect)
@@ -47,7 +72,6 @@ class Canvas: UIView {
     
     //MARK:- Lines array
     //var line = [CGPoint]()
-    var lines = [[CGPoint]]()
     
     //finger tracking for our drawing logic
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -70,16 +94,4 @@ class Canvas: UIView {
         
         setNeedsDisplay() //redraws the entire bounds rect of the view
     }
-    
-    //MARK:- Undo/clear
-    @objc func undo() {
-        print("undo triggered")
-    }
-    
-    @objc func clear() {
-        print("clear triggered")
-        lines.removeAll()
-        setNeedsDisplay()
-    }
-    
 }
