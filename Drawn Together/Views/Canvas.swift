@@ -23,6 +23,17 @@ class Canvas: UIView {
         setNeedsDisplay()
     }
     
+    func setStrokeColor(color: UIColor) {
+        self.strokeColor = color
+    }
+    
+    func setStrokeWidth(width: CGFloat) {
+        self.strokeWidth = width
+    }
+    
+    //MARK:- Properties
+    fileprivate var strokeColor: UIColor = UIColor.black
+    fileprivate var strokeWidth: CGFloat = 5
     fileprivate var lines = [[CGPoint]]()
     
     override init(frame: CGRect) {
@@ -53,8 +64,8 @@ class Canvas: UIView {
         //        context.addLine(to: endPoint)
         
         //MARK:- Stroke customization
-        context.setStrokeColor(UIColor.red.cgColor)
-        context.setLineWidth(10)
+        context.setStrokeColor(strokeColor.cgColor)
+        context.setLineWidth(strokeWidth)
         context.setLineCap(.butt) //rounded
         
         lines.forEach { (line) in
