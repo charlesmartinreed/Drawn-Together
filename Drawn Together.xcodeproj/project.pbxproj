@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8C4F402D21E40F6A00AA0732 /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4F402C21E40F6A00AA0732 /* Line.swift */; };
 		8C7D8A4321DEAF7F00FB104B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7D8A4221DEAF7F00FB104B /* AppDelegate.swift */; };
 		8C7D8A4521DEAF7F00FB104B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7D8A4421DEAF7F00FB104B /* ViewController.swift */; };
 		8C7D8A4821DEAF7F00FB104B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C7D8A4621DEAF7F00FB104B /* Main.storyboard */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8C4F402C21E40F6A00AA0732 /* Line.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
 		8C7D8A3F21DEAF7F00FB104B /* Drawn Together.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Drawn Together.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C7D8A4221DEAF7F00FB104B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8C7D8A4421DEAF7F00FB104B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -39,6 +41,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8C4F402B21E40F5700AA0732 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8C4F402C21E40F6A00AA0732 /* Line.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		8C7D8A3621DEAF7F00FB104B = {
 			isa = PBXGroup;
 			children = (
@@ -58,6 +68,7 @@
 		8C7D8A4121DEAF7F00FB104B /* Drawn Together */ = {
 			isa = PBXGroup;
 			children = (
+				8C4F402B21E40F5700AA0732 /* Models */,
 				8C7D8A5621DEB82800FB104B /* Views */,
 				8C7D8A4221DEAF7F00FB104B /* AppDelegate.swift */,
 				8C7D8A5721DEB83D00FB104B /* Controllers */,
@@ -161,6 +172,7 @@
 				8C7D8A5921DEBE5900FB104B /* Colors.swift in Sources */,
 				8C7D8A4321DEAF7F00FB104B /* AppDelegate.swift in Sources */,
 				8C7D8A5521DEB7D100FB104B /* Canvas.swift in Sources */,
+				8C4F402D21E40F6A00AA0732 /* Line.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

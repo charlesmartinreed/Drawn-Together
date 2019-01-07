@@ -34,7 +34,9 @@ class Canvas: UIView {
     //MARK:- Properties
     fileprivate var strokeColor: UIColor = UIColor.black
     fileprivate var strokeWidth: CGFloat = 5
-    fileprivate var lines = [[CGPoint]]()
+    
+    //using our newly created Model to create a collection of Line objects
+    fileprivate var lines = [Line]()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -64,21 +66,22 @@ class Canvas: UIView {
         //        context.addLine(to: endPoint)
         
         //MARK:- Stroke customization
-        context.setStrokeColor(strokeColor.cgColor)
-        context.setLineWidth(strokeWidth)
-        context.setLineCap(.butt) //rounded
-        
         lines.forEach { (line) in
-            for (i, p) in line.enumerated() {
-                if i == 0 { //if first touch
-                    context.move(to: p)
+            context.setStrokeColor(line.color.cgColor)
+            context.setLineWidth(line.strokeWidth)
+            context.setLineCap(.round)
+            for (i, point) in line.points.enumerated() {
+                if i == 0 {
+                    context.move(to: point)
                 } else {
-                    context.addLine(to: p)
+                    context.addLine(to: point)
                 }
             }
+            //stroking path after each call allows us to use the unique values of each line color, width, etc.
+            context.strokePath()
         }
         
-        context.strokePath()
+        
     }
     
     //MARK:- Lines array
@@ -87,7 +90,7 @@ class Canvas: UIView {
     //finger tracking for our drawing logic
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         //each time touch begins, add a brand new collection of CGPoint to the lines collection
-        lines.append([CGPoint]())
+        lines.append(Line.init(color: strokeColor, strokeWidth: strokeWidth, points: []))
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -98,7 +101,7 @@ class Canvas: UIView {
         guard var lastLine = lines.popLast() else { return }
         
         //add the first touch point to the lastLines collection
-        lastLine.append(point)
+        lastLine.points.append(point)
         
         //append the collection into the lines collection
         lines.append(lastLine)
