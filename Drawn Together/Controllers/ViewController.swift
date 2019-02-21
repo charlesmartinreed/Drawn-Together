@@ -7,11 +7,25 @@
 //
 
 import UIKit
+import MultipeerConnectivity
 
 class ViewController: UIViewController {
     
     //MARK:- Properties
     let canvas = Canvas()
+    
+    var peerID: MCPeerID!
+    var mcSession: MCSession!
+    var mcAdvertiserAssistant: MCAdvertiserAssistant!
+    
+    let addUserButton: UIButton = {
+        let button = UIButton()
+        button.setImage(#imageLiteral(resourceName: "addFriendIcon"), for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(addUserButtonTapped), for: .touchUpInside)
+        return button
+    }()
+    
     
     let undoButton: UIButton = {
        let button = UIButton(type: .system)
@@ -70,14 +84,31 @@ class ViewController: UIViewController {
     override func loadView() {
         //we can immediately set the view controller's view to be the canvas
         self.view = canvas
+        canvas.frame = view.frame
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        initializeMultipeer()
+        setupTopButtons()
         layoutToolbar()
     }
+    
+    func initializeMultipeer() {
+        peerID = MCPeerID(displayName: UIDevice.current.name)
+        mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
+        mcSession.delegate = self
+    }
 
+    func setupTopButtons() {
+        view.addSubview(addUserButton)
+        
+        addUserButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8).isActive = true
+        addUserButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -8).isActive = true
+        addUserButton.widthAnchor.constraint(equalToConstant: 36).isActive = true
+        addUserButton.heightAnchor.constraint(equalToConstant: 36).isActive = true
+    }
     
     func layoutToolbar() {
         //V1: using stack views to layout our tools window directly onto the canvas
@@ -118,6 +149,71 @@ class ViewController: UIViewController {
     @objc fileprivate func handleSliderChanged(slider: UISlider) {
         canvas.setStrokeWidth(width: CGFloat(slider.value))
     }
+    
+    @objc fileprivate func addUserButtonTapped() {
+        let ac = UIAlertController(title: "Add a friend!", message: "Connect to other nearby users", preferredStyle: .actionSheet)
+        
+        ac.addAction(UIAlertAction(title: "Host a friend", style: .default) { [unowned self] action in
+            self.mcAdvertiserAssistant = MCAdvertiserAssistant(serviceType: "canvas-app", discoveryInfo: nil, session: self.mcSession)
+            self.mcAdvertiserAssistant.start()
+        })
+        
+        ac.addAction(UIAlertAction(title: "Join a friend", style: .default, handler: { [unowned self] action in
+            let mcBrowser = MCBrowserViewController(serviceType: "canvas-app", session: self.mcSession)
+            mcBrowser.delegate = self
+            self.present(mcBrowser, animated: true, completion: nil)
+        }))
+        
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (_) in
+            self.dismiss(animated: true, completion: nil)
+        }))
+        
+        present(ac, animated: true, completion: nil)
+        
+        
+    }
 
 }
+
+extension ViewController: MCSessionDelegate, MCBrowserViewControllerDelegate {
+    func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
+        switch state {
+        case .connected:
+            print("Connected: \(peerID.displayName)")
+        case .connecting:
+            print("Connecting: \(peerID.displayName)")
+        case .notConnected:
+            print("Not Connected: \(peerID.displayName)")
+        }
+    }
+    
+    func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
+        
+    }
+    
+    func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
+        
+    }
+    
+    func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {
+        
+    }
+    
+    func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
+        
+    }
+    
+    
+    func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    
+}
+
+
 
