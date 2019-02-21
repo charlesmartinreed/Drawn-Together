@@ -15,6 +15,8 @@
 		8C7D8A4D21DEAF8100FB104B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C7D8A4B21DEAF8100FB104B /* LaunchScreen.storyboard */; };
 		8C7D8A5521DEB7D100FB104B /* Canvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7D8A5421DEB7D100FB104B /* Canvas.swift */; };
 		8C7D8A5921DEBE5900FB104B /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7D8A5821DEBE5900FB104B /* Colors.swift */; };
+		8CC3A460221E19AB00D68657 /* MultipeerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC3A45F221E19AB00D68657 /* MultipeerCoordinator.swift */; };
+		8CC3A462221E1B6B00D68657 /* PeeringVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC3A461221E1B6B00D68657 /* PeeringVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		8C7D8A4E21DEAF8100FB104B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8C7D8A5421DEB7D100FB104B /* Canvas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Canvas.swift; sourceTree = "<group>"; };
 		8C7D8A5821DEBE5900FB104B /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		8CC3A45F221E19AB00D68657 /* MultipeerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipeerCoordinator.swift; sourceTree = "<group>"; };
+		8CC3A461221E1B6B00D68657 /* PeeringVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeeringVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,9 +72,10 @@
 		8C7D8A4121DEAF7F00FB104B /* Drawn Together */ = {
 			isa = PBXGroup;
 			children = (
+				8C7D8A4221DEAF7F00FB104B /* AppDelegate.swift */,
+				8CC3A45F221E19AB00D68657 /* MultipeerCoordinator.swift */,
 				8C4F402B21E40F5700AA0732 /* Models */,
 				8C7D8A5621DEB82800FB104B /* Views */,
-				8C7D8A4221DEAF7F00FB104B /* AppDelegate.swift */,
 				8C7D8A5721DEB83D00FB104B /* Controllers */,
 				8C7D8A4621DEAF7F00FB104B /* Main.storyboard */,
 				8C7D8A4921DEAF8100FB104B /* Assets.xcassets */,
@@ -93,6 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				8C7D8A4421DEAF7F00FB104B /* ViewController.swift */,
+				8CC3A461221E1B6B00D68657 /* PeeringVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -172,6 +178,8 @@
 				8C7D8A5921DEBE5900FB104B /* Colors.swift in Sources */,
 				8C7D8A4321DEAF7F00FB104B /* AppDelegate.swift in Sources */,
 				8C7D8A5521DEB7D100FB104B /* Canvas.swift in Sources */,
+				8CC3A462221E1B6B00D68657 /* PeeringVC.swift in Sources */,
+				8CC3A460221E19AB00D68657 /* MultipeerCoordinator.swift in Sources */,
 				8C4F402D21E40F6A00AA0732 /* Line.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
